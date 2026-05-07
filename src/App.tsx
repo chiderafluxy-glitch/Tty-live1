@@ -430,7 +430,7 @@ export default function App() {
 
   const stopSession = () => {
     if (activeSession) {
-      apiFetch(`/api/sessions/${activeSession.id}`, { method: 'PATCH', body: JSON.stringify({ status: 'completed' }) });
+      apiFetch(`/api/sessions/${activeSession.id}?path=session-update&id=${activeSession.id}`, { method: 'PATCH', body: JSON.stringify({ status: 'completed' }) });
       if (realtimeRef.current) { realtimeRef.current.unsubscribe(); realtimeRef.current = null; }
     }
   };
