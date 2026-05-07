@@ -352,6 +352,7 @@ export default function App() {
   const [copySuccess, setCopySuccess] = useState(false);
   const [viewingSessionId, setViewingSessionId] = useState<string | null>(null);
   const [sub, setSub] = useState<any>({ plan: 'trial', status: 'active' });
+  const [sessionLink, setSessionLink] = useState<string>('');
 
   // Check URL for viewer mode
   useEffect(() => {
