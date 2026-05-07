@@ -211,7 +211,7 @@ const SessionRow = ({ session }: { session: Session }) => {
 };
 
 const ViewerPage = ({ sessionId, onBack }: { sessionId: string, onBack: () => void }) => {
-  const [viewerCount, setViewerCount] = useState(0);
+  const [viewerCount, setViewerCount] = useState<number>(0);
   const [lines, setLines] = useState<string[]>(['\x1b[36mConnecting to session...\x1b[0m']);
   const terminalRef = useRef<HTMLDivElement>(null);
 
@@ -353,7 +353,7 @@ export default function App() {
   const [viewingSessionId, setViewingSessionId] = useState<string | null>(null);
   const [sub, setSub] = useState<any>({ plan: 'trial', status: 'active' });
   const [sessionLink, setSessionLink] = useState<string>('');
-  const [viewerCount, setViewerCount] = useState(0);
+  const [viewerCount, setViewerCount] = useState<number>(0);
 
   // Check URL for viewer mode
   useEffect(() => {
