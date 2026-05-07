@@ -353,6 +353,7 @@ export default function App() {
   const [viewingSessionId, setViewingSessionId] = useState<string | null>(null);
   const [sub, setSub] = useState<any>({ plan: 'trial', status: 'active' });
   const [sessionLink, setSessionLink] = useState<string>('');
+  const [viewerCount, setViewerCount] = useState(0);
 
   // Check URL for viewer mode
   useEffect(() => {
