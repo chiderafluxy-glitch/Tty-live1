@@ -106,7 +106,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const sessionId = crypto.randomBytes(4).toString("hex");
       const name = req.body?.name || `Session ${sessionId}`;
       await supabase.from("sessions").insert({ id: sessionId, user_id: user.user_id, name, status: "active", start_time: new Date().toISOString() });
-      return res.json({ id: sessionId, name, viewerUrl: `${process.env.VIEWER_URL}/view/${sessionId}`, status: "active" });
+      const viewerBase = process.env.VIEWER_URL || 'https://tty-viewer1.vercel.app';
+      return res.json({ id: sessionId, name, viewerUrl: `${viewerBase}/view/${sessionId}`, status: "active" });
     }
   }
 
