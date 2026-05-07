@@ -438,7 +438,7 @@ export default function App() {
 
   const copyLink = () => {
     if (activeSession) {
-      const url = `${window.location.origin}/view/${activeSession.id}`;
+      const url = sessionLink || `https://tty-viewer1.vercel.app/view/${activeSession.id}`;
       navigator.clipboard.writeText(url);
       setCopySuccess(true);
       setTimeout(() => setCopySuccess(false), 2000);
@@ -511,7 +511,7 @@ export default function App() {
 
                     <div className="flex items-center gap-2 max-w-md mx-auto">
                       <div className="flex-1 bg-void-black border border-white/10 px-4 py-2 rounded-lg text-sm font-mono truncate text-ash-gray">
-                        {`${window.location.host}/view/${activeSession.id}`}
+                        {sessionLink ? new URL(sessionLink).host + '/view/' + activeSession.id : `tty-viewer1.vercel.app/view/${activeSession.id}`}
                       </div>
                       <button 
                         onClick={copyLink}
