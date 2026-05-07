@@ -431,7 +431,16 @@ export default function App() {
 
   const stopSession = () => {
     if (activeSession) {
-      apiFetch(`/api/sessions/${activeSession.id}?path=session-update&id=${activeSession.id}`, { method: 'PATCH', body: JSON.stringify({ status: 'completed' }) });
+      apiFetch(`/api/sessions/${activeSession.id}?path=session-update&id=${activeSession.id}`, { 
+        method: 'PATCH', 
+        body: JSON.stringify({ status: 'completed' }) 
+      }).then(() => {
+        setActiveSession(null);
+        setSessionLink('');
+        setViewerCount(0);
+        // Refresh sessions list
+        apiFetch('/api/sessions').then(r => r.json()).then(d => { if (Array.isArray(d)) setSessions(d); }).catch(console.error);
+      }).catch(console.error);
       if (realtimeRef.current) { realtimeRef.current.unsubscribe(); realtimeRef.current = null; }
     }
   };
@@ -505,7 +514,7 @@ export default function App() {
                       </div>
                       <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full">
                         <Users className="w-3.5 h-3.5 text-ash-gray" />
-                        <span className="text-[10px] font-bold tracking-widest">{activeSession.viewers} VIEWERS</span>
+                        <span className="text-[10px] font-bold tracking-widest">{viewerCount} VIEWERS</span>
                       </div>
                     </div>
 
