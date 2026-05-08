@@ -472,19 +472,27 @@ export default function App() {
         <AnimatePresence mode="wait">
           <motion.div key="landing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen">
             {/* Nav */}
-            <nav className="fixed top-0 left-0 right-0 z-50 nav-blur">
-              <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Terminal className="text-neon-orange" size={24} />
-                  <span className="font-display text-xl font-bold tracking-tight text-white">tty.live</span>
+            <nav className="fixed top-0 left-0 right-0 z-50 bg-midnight-abyss/90 backdrop-blur-md border-b border-white/5">
+              <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2 shrink-0">
+                  <div className="w-7 h-7 bg-neon-orange rounded-lg flex items-center justify-center">
+                    <Terminal className="text-white" size={14} />
+                  </div>
+                  <span className="font-bold text-base tracking-tight text-white">tty.live</span>
                 </div>
-                <div className="hidden md:flex items-center gap-8 text-sm font-medium text-whisper-blue">
-                  <a href="#features" className="hover:text-neon-orange transition-colors">Features</a>
-                  <a href="#pricing" className="hover:text-neon-orange transition-colors">Pricing</a>
-                </div>
-                <div className="flex items-center gap-4">
-                  <button onClick={() => window.location.href = `${SERVER_URL}/api?path=auth-github`} className="text-sm font-medium hover:text-white transition-colors cursor-pointer text-whisper-blue">Log in</button>
-                  <Button onClick={() => window.location.href = `${SERVER_URL}/api?path=auth-github`} variant="orange" className="shadow-orange-glow">Start Free Trial</Button>
+                <div className="flex items-center gap-2 shrink-0">
+                  <button 
+                    onClick={() => window.location.href = `${SERVER_URL}/api?path=auth-github`} 
+                    className="text-sm font-medium px-3 py-1.5 rounded-lg text-whisper-blue hover:text-white hover:bg-white/5 transition-colors"
+                  >
+                    Log in
+                  </button>
+                  <button 
+                    onClick={() => window.location.href = `${SERVER_URL}/api?path=auth-github`}
+                    className="text-sm font-semibold px-4 py-1.5 rounded-lg bg-neon-orange text-white hover:bg-neon-orange/90 transition-colors whitespace-nowrap"
+                  >
+                    Start Free Trial
+                  </button>
                 </div>
               </div>
             </nav>
