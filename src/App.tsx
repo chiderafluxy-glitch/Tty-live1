@@ -22,6 +22,11 @@ import {
   ChevronLeft
 } from 'lucide-react';
 import { createClient } from '@supabase/supabase-js';
+import { FEATURES, PRICING, STEPS } from './constants';
+import { TerminalDemo } from './components/TerminalDemo';
+import { GlassCard } from './components/GlassCard';
+import { Button } from './components/Button';
+
 
 const SERVER_URL = 'https://tty-live-worker.workers.dev';
 const SUPABASE_URL = 'https://ghpmcjozeubrmiuzyfey.supabase.co';
@@ -354,6 +359,9 @@ export default function App() {
   const [sub, setSub] = useState<any>({ plan: 'trial', status: 'active' });
   const [sessionLink, setSessionLink] = useState<string>('');
   const [viewerCount, setViewerCount] = useState<number>(0);
+  const [landingView, setLandingView] = useState<'landing' | 'auth' | 'dashboard'>(() => {
+    return localStorage.getItem('tty_token') ? 'dashboard' : 'landing';
+  });
 
   // Check URL for viewer mode
   useEffect(() => {
@@ -454,6 +462,124 @@ export default function App() {
       setTimeout(() => setCopySuccess(false), 2000);
     }
   };
+
+  // Show landing page if not logged in
+  if (landingView === 'landing') {
+    return (
+      <div className="min-h-screen bg-midnight-abyss">
+        <AnimatePresence mode="wait">
+          <motion.div key="landing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen">
+            {/* Nav */}
+            <nav className="fixed top-0 left-0 right-0 z-50 nav-blur">
+              <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Terminal className="text-neon-orange" size={24} />
+                  <span className="font-display text-xl font-bold tracking-tight text-white">tty.live</span>
+                </div>
+                <div className="hidden md:flex items-center gap-8 text-sm font-medium text-whisper-blue">
+                  <a href="#features" className="hover:text-neon-orange transition-colors">Features</a>
+                  <a href="#pricing" className="hover:text-neon-orange transition-colors">Pricing</a>
+                </div>
+                <div className="flex items-center gap-4">
+                  <button onClick={() => window.location.href = `${SERVER_URL}/api?path=auth-github`} className="text-sm font-medium hover:text-white transition-colors cursor-pointer text-whisper-blue">Log in</button>
+                  <Button onClick={() => window.location.href = `${SERVER_URL}/api?path=auth-github`} variant="orange" className="shadow-orange-glow">Start Free Trial</Button>
+                </div>
+              </div>
+            </nav>
+
+            {/* Hero */}
+            <section className="pt-32 pb-20 px-6 relative overflow-hidden">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-neon-orange/10 blur-[120px] rounded-full -z-10" />
+              <div className="max-w-7xl mx-auto text-center">
+                <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-5xl md:text-7xl font-display font-medium text-white mb-6 tracking-tight leading-[1.1]">
+                  Share your terminal. <br /><span className="text-neon-orange">Instantly.</span>
+                </motion.h1>
+                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-lg md:text-xl text-comet mb-10 max-w-2xl mx-auto leading-relaxed">
+                  Zero-latency terminal sharing. Run one command, get a link, and let anyone watch your work live in their browser.
+                </motion.p>
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+                  <Button onClick={() => window.location.href = `${SERVER_URL}/api?path=auth-github`} variant="orange" className="px-8 h-11 text-base shadow-orange-glow">
+                    Start Free Trial <ChevronRight size={18} />
+                  </Button>
+                </motion.div>
+                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="text-xs text-interstellar-gray">
+                  7-day free trial. No card required. Cancel anytime.
+                </motion.p>
+              </div>
+            </section>
+
+            {/* Terminal Demo */}
+            <section className="py-20 px-6">
+              <div className="max-w-4xl mx-auto"><TerminalDemo /></div>
+            </section>
+
+            {/* Features */}
+            <section id="features" className="py-32 px-6">
+              <div className="max-w-7xl mx-auto text-center mb-20">
+                <h2 className="text-3xl font-display font-bold text-white mb-4">Powerful features for devs</h2>
+                <p className="text-comet">Built for pair programming, debugging, and teaching.</p>
+              </div>
+              <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {FEATURES.map((feature, i) => (
+                  <GlassCard key={i} delay={i * 0.1}>
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="p-2 bg-neon-orange/10 rounded-lg text-neon-orange"><feature.icon size={24} /></div>
+                      {feature.isPro && <span className="text-[10px] font-bold uppercase tracking-wider bg-neon-orange px-2 py-0.5 rounded-md text-white">Pro</span>}
+                    </div>
+                    <h3 className="text-lg font-bold text-white mb-2 font-display">{feature.title}</h3>
+                    <p className="text-sm text-azure-glow leading-relaxed">{feature.description}</p>
+                  </GlassCard>
+                ))}
+              </div>
+            </section>
+
+            {/* Pricing */}
+            <section id="pricing" className="py-32 px-6 bg-white/[0.01]">
+              <div className="max-w-7xl mx-auto text-center mb-16">
+                <h2 className="text-3xl font-display font-bold text-white mb-4">Simple pricing</h2>
+                <p className="text-comet">Choose the plan that fits your workflow.</p>
+              </div>
+              <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+                {PRICING.map((plan, i) => (
+                  <div key={i} className={`p-8 rounded-3xl border transition-all duration-500 hover:scale-[1.02] ${i === 1 ? 'border-neon-orange bg-neon-orange/5 shadow-orange-glow' : 'border-white/10 bg-white/5'} relative overflow-hidden backdrop-blur-sm`}>
+                    {i === 1 && <div className="absolute top-0 right-0 bg-neon-orange text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-widest">Most Popular</div>}
+                    <h3 className="text-xl font-bold text-white mb-2 font-display">{plan.name}</h3>
+                    <div className="flex items-baseline gap-1 mb-6">
+                      <span className="text-4xl font-bold text-white">${plan.price}</span>
+                      <span className="text-whisper-blue text-sm">/month</span>
+                    </div>
+                    <ul className="space-y-4 mb-8">
+                      {plan.features.map((f, j) => (
+                        <li key={j} className="flex items-center gap-3 text-sm text-arctic-mist">
+                          <Check size={16} className="text-neon-orange shrink-0" /> {f}
+                        </li>
+                      ))}
+                    </ul>
+                    <Button onClick={() => window.location.href = `${SERVER_URL}/api?path=auth-github`} variant={i === 1 ? "orange" : "glass"} className="w-full h-11">Start Free Trial</Button>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Footer */}
+            <footer className="py-20 px-6 border-t border-white/5 bg-midnight-abyss">
+              <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+                <div className="flex items-center gap-2">
+                  <Terminal className="text-neon-orange" size={20} />
+                  <span className="font-display font-bold text-white">tty.live</span>
+                </div>
+                <div className="flex gap-8 text-sm text-azure-glow">
+                  <a href="#" className="hover:text-white">Privacy</a>
+                  <a href="#" className="hover:text-white">Terms</a>
+                </div>
+                <div className="text-xs text-interstellar-gray">© 2026 tty.live. All rights reserved.</div>
+              </div>
+            </footer>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    );
+  }
 
   if (viewingSessionId) {
     return <ViewerPage sessionId={viewingSessionId} onBack={() => {
