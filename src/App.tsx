@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
-  Terminal, 
+  Terminal,
+  Check,
+  ChevronRight,
   LayoutDashboard, 
   History, 
   Settings, 
