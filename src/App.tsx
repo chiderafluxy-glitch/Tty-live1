@@ -489,9 +489,9 @@ export default function App() {
                   </button>
                   <button 
                     onClick={() => window.location.href = `${SERVER_URL}/api?path=auth-github`}
-                    className="text-sm font-semibold px-4 py-1.5 rounded-lg bg-neon-orange text-white hover:bg-neon-orange/90 transition-colors whitespace-nowrap"
+                    className="text-xs font-bold px-3 py-1.5 rounded-full bg-neon-orange text-white hover:bg-neon-orange/90 transition-colors"
                   >
-                    Start Free Trial
+                    Try Free
                   </button>
                 </div>
               </div>
