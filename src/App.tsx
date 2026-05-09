@@ -502,7 +502,7 @@ export default function App() {
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-neon-orange/10 blur-[120px] rounded-full -z-10" />
               <div className="max-w-7xl mx-auto text-center">
                 <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-3xl sm:text-5xl md:text-7xl font-display font-bold text-white mb-6 tracking-tight leading-tight">
-                  Share your terminal. <br /><span className="text-neon-orange">Instantly.</span>
+                  Share your terminal.<br/><span className="text-neon-orange">Instantly.</span>
                 </motion.h1>
                 <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-lg md:text-xl text-comet mb-10 max-w-2xl mx-auto leading-relaxed">
                   Zero-latency terminal sharing. Run one command, get a link, and let anyone watch your work live in their browser.

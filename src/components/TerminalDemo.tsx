@@ -66,13 +66,13 @@ export function TerminalDemo() {
       </div>
       {/* Terminal content */}
       <div className="p-5 font-mono text-[13px] h-64 overflow-hidden">
-        {visibleLines.map((line, i) => (
+        {visibleLines.filter(Boolean).map((line, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.15 }}
-            className={`leading-relaxed ${getColor(line.type)}`}
+            className={`leading-relaxed ${line ? getColor(line.type) : ""}`}
           >
             {line.text}
           </motion.div>
