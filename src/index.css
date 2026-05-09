@@ -1,114 +1,38 @@
+@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500&family=IBM+Plex+Mono&display=swap');
 
-@import "tailwindcss";
-
 @theme {
-  /* Landing page colors */
+  /* Colors */
   --color-midnight-abyss: #05060f;
+  --color-ghost-white: #ffffff;
+  --color-storm-gray: #2f343e;
   --color-comet: #d8ecf8;
   --color-arctic-mist: #d1e4fa;
+  --color-celestial-light: #ffedd5; /* Warm highlight */
   --color-azure-glow: #c7d3ea;
+  --color-slate-dew: #3f4959;
   --color-whisper-blue: #9da7ba;
-  --color-neon-orange: #ed9000;
+  --color-neon-orange: #ed9000; /* Requested Orange */
+  --color-amber-glow: #f59e0b;
   --color-interstellar-gray: #81899b;
-  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-  --shadow-orange-glow: 0 0 25px rgba(237, 144, 0, 0.3);
-  --shadow-subtle-glass: inset rgba(255, 255, 255, 0.05) 0px 1px 1px 0px, rgba(0, 0, 0, 0.4) 0px 24px 48px -12px;
-  --shadow-auth-card: inset rgba(255, 255, 255, 0.1) 0px 1px 1px 0px, rgba(0, 0, 0, 0.5) 0px 16px 32px 0px;
-  /* Colors */
-  --color-void-black: #000000;
-  --color-canvas-white: #ffffff;
-  --color-ash-gray: #a3a3a3;
-  --color-coal: #171717;
-  --color-iron: #262626;
-  --color-frost: #f5f5f5;
-  --color-deep-space-gradient: #474747;
-  --color-cosmic-drift-gradient: #646464;
-  --color-haze-gradient: #ffffff;
 
   /* Typography */
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-
-  /* Spacing */
-  --spacing-4: 4px;
-  --spacing-8: 8px;
-  --spacing-12: 12px;
-  --spacing-16: 16px;
-  --spacing-20: 20px;
-  --spacing-24: 24px;
-  --spacing-28: 28px;
-  --spacing-32: 32px;
-  --spacing-40: 40px;
-  --spacing-44: 44px;
-  --spacing-48: 48px;
-  --spacing-64: 64px;
-  --spacing-96: 96px;
-  --spacing-108: 108px;
-  --spacing-160: 160px;
-  --spacing-192: 192px;
-
-  /* Border Radius */
-  --radius-lg: 8px;
-  --radius-xl: 14px;
-  --radius-3xl: 24px;
-  --radius-3xl-2: 32px;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
 
   /* Shadows */
-  --shadow-sm: rgba(255, 255, 255, 0.05) 0px 1px 6px 0px;
-  --shadow-subtle: rgba(255, 255, 255, 0.05) 0px 1px 3px 0px, rgba(255, 255, 255, 0.05) 0px 1px 2px -1px;
+  --shadow-subtle-glass: inset rgba(255, 255, 255, 0.05) 0px 1px 1px 0px, rgba(0, 0, 0, 0.4) 0px 24px 48px -12px;
+  --shadow-auth-card: inset rgba(255, 255, 255, 0.1) 0px 1px 1px 0px, rgba(0, 0, 0, 0.5) 0px 16px 32px 0px;
+  --shadow-pill: inset rgba(255, 255, 255, 0.05) 0px 0px 0px 1px;
+  --shadow-outline: inset rgba(255, 255, 255, 0.1) 0px 0px 0px 1px;
+  --shadow-orange-glow: 0 0 25px rgba(237, 144, 0, 0.3);
 }
 
 @layer base {
   body {
-    @apply bg-void-black text-canvas-white font-sans antialiased;
-    background-image: radial-gradient(circle at 50% -20%, #171717 0%, #000000 100%);
-    min-height: 100vh;
+    @apply bg-midnight-abyss text-comet font-sans antialiased selection:bg-neon-orange/30 selection:text-white;
   }
-
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight;
-  }
-}
-
-@layer components {
-  .btn-primary {
-    @apply bg-canvas-white text-void-black px-5 py-3 rounded-lg font-medium transition-all hover:opacity-90 active:scale-[0.98] shadow-sm;
-  }
-
-  .btn-secondary {
-    @apply bg-iron text-canvas-white px-5 py-3 rounded-lg font-medium transition-all hover:bg-coal active:scale-[0.98] border border-white/10;
-  }
-
-  .btn-ghost {
-    @apply text-ash-gray hover:text-canvas-white transition-colors px-3 py-2 rounded-lg hover:bg-white/5;
-  }
-
-  .card-terminal {
-    @apply bg-coal/50 border border-white/10 rounded-xl overflow-hidden backdrop-blur-sm;
-  }
-
-  .stat-card {
-    @apply bg-void-black border border-white/5 p-5 rounded-xl hover:border-white/10 transition-colors;
-  }
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-iron rounded-full;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-ash-gray;
 }
 
 @utility glass-card {
@@ -125,4 +49,10 @@
 
 @utility glass-button {
   @apply bg-white/[0.05] border border-white/10 backdrop-blur-lg hover:bg-white/[0.1] hover:border-white/20 transition-all duration-300;
+}
+
+/* Dashboard specific overrides */
+@layer base {
+  .void-black { color: #000000; }
+  .canvas-white { color: #ffffff; }
 }

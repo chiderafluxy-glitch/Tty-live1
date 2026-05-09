@@ -470,60 +470,83 @@ export default function App() {
     return (
       <div className="min-h-screen bg-midnight-abyss">
         <AnimatePresence mode="wait">
-          <motion.div key="landing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen">
-            {/* Nav */}
-            <nav className="fixed top-0 left-0 right-0 z-50 bg-midnight-abyss/90 backdrop-blur-md border-b border-white/5">
-              <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2 shrink-0">
-                  <div className="w-7 h-7 bg-neon-orange rounded-lg flex items-center justify-center">
-                    <Terminal className="text-white" size={14} />
-                  </div>
-                  <span className="font-bold text-base tracking-tight text-white">tty.live</span>
+          <motion.div 
+            key="landing"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="min-h-screen"
+          >
+            {/* Nav - exact original */}
+            <nav className="fixed top-0 left-0 right-0 z-50 nav-blur">
+              <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Terminal className="text-neon-orange" size={24} />
+                  <span className="font-display text-xl font-bold tracking-tight text-white">tty.live</span>
                 </div>
-                <div className="flex items-center gap-2 shrink-0">
-                  <button 
-                    onClick={() => window.location.href = `https://tty-live1.vercel.app/api?path=auth-github`} 
-                    className="text-sm font-medium px-3 py-1.5 rounded-lg text-whisper-blue hover:text-white hover:bg-white/5 transition-colors"
-                  >
-                    Log in
-                  </button>
-                  <button 
-                    onClick={() => window.location.href = `https://tty-live1.vercel.app/api?path=auth-github`}
-                    className="text-xs font-bold px-3 py-1.5 rounded-full bg-neon-orange text-white hover:bg-neon-orange/90 transition-colors"
-                  >
-                    Try Free
+                <div className="hidden md:flex items-center gap-8 text-sm font-medium text-whisper-blue">
+                  <a href="#features" className="hover:text-neon-orange transition-colors">Features</a>
+                  <a href="#pricing" className="hover:text-neon-orange transition-colors">Pricing</a>
+                </div>
+                <div className="flex items-center gap-4">
+                  <button onClick={() => window.location.href = "https://tty-live1.vercel.app/api?path=auth-github"} className="text-sm font-medium hover:text-white transition-colors cursor-pointer text-whisper-blue">Log in</button>
+                  <button onClick={() => window.location.href = "https://tty-live1.vercel.app/api?path=auth-github"} className="inline-flex items-center gap-2 px-4 py-2 rounded-xl font-semibold text-sm bg-neon-orange hover:bg-neon-orange/90 text-white transition-all shadow-orange-glow">
+                    Start Free Trial
                   </button>
                 </div>
               </div>
             </nav>
 
-            {/* Hero */}
-            <section className="pt-20 pb-16 px-5 relative overflow-hidden">
+            {/* Hero Section */}
+            <section className="pt-32 pb-20 px-6 relative overflow-hidden">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-neon-orange/10 blur-[120px] rounded-full -z-10" />
               <div className="max-w-7xl mx-auto text-center">
-                <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-3xl sm:text-5xl md:text-7xl font-display font-bold text-white mb-6 tracking-tight leading-tight">
-                  Share your terminal.<br/><span className="text-neon-orange">Instantly.</span>
+                <motion.h1 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-5xl md:text-7xl font-display font-medium text-white mb-6 tracking-tight leading-[1.1]"
+                >
+                  Share your terminal. <br />
+                  <span className="text-neon-orange">Instantly.</span>
                 </motion.h1>
-                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-lg md:text-xl text-comet mb-10 max-w-2xl mx-auto leading-relaxed">
-                  Zero-latency terminal sharing. Run one command, get a link, and let anyone watch your work live in their browser.
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="text-lg md:text-xl text-comet mb-10 max-w-2xl mx-auto leading-relaxed font-sans"
+                >
+                  Zero-latency terminal sharing. Run one command, get a link, 
+                  and let anyone watch your work live in their browser.
                 </motion.p>
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-                  <Button onClick={() => window.location.href = `https://tty-live1.vercel.app/api?path=auth-github`} variant="orange" className="px-8 h-11 text-base shadow-orange-glow">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
+                >
+                  <button onClick={() => window.location.href = "https://tty-live1.vercel.app/api?path=auth-github"} className="inline-flex items-center gap-2 px-8 h-11 text-base rounded-xl font-semibold bg-neon-orange hover:bg-neon-orange/90 text-white transition-all shadow-orange-glow">
                     Start Free Trial <ChevronRight size={18} />
-                  </Button>
+                  </button>
                 </motion.div>
-                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="text-xs text-interstellar-gray">
+                <motion.p 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-xs text-interstellar-gray"
+                >
                   7-day free trial. No card required. Cancel anytime.
                 </motion.p>
               </div>
             </section>
 
-            {/* Terminal Demo */}
-            <section className="py-20 px-6">
-              <div className="max-w-4xl mx-auto"><TerminalDemo /></div>
+            {/* Demo Section */}
+            <section id="demo" className="py-20 px-6">
+              <div className="max-w-4xl mx-auto">
+                <TerminalDemo />
+              </div>
             </section>
 
-            {/* Features */}
+            {/* Features Section */}
             <section id="features" className="py-32 px-6">
               <div className="max-w-7xl mx-auto text-center mb-20">
                 <h2 className="text-3xl font-display font-bold text-white mb-4">Powerful features for devs</h2>
@@ -533,8 +556,12 @@ export default function App() {
                 {FEATURES.map((feature, i) => (
                   <GlassCard key={i} delay={i * 0.1}>
                     <div className="flex items-start justify-between mb-4">
-                      <div className="p-2 bg-neon-orange/10 rounded-lg text-neon-orange"><feature.icon size={24} /></div>
-                      {feature.isPro && <span className="text-[10px] font-bold uppercase tracking-wider bg-neon-orange px-2 py-0.5 rounded-md text-white">Pro</span>}
+                      <div className="p-2 bg-neon-orange/10 rounded-lg text-neon-orange">
+                        <feature.icon size={24} />
+                      </div>
+                      {feature.isPro && (
+                        <span className="text-[10px] font-bold uppercase tracking-wider bg-neon-orange px-2 py-0.5 rounded-md text-white">Pro</span>
+                      )}
                     </div>
                     <h3 className="text-lg font-bold text-white mb-2 font-display">{feature.title}</h3>
                     <p className="text-sm text-azure-glow leading-relaxed">{feature.description}</p>
@@ -543,7 +570,7 @@ export default function App() {
               </div>
             </section>
 
-            {/* Pricing */}
+            {/* Pricing Section */}
             <section id="pricing" className="py-32 px-6 bg-white/[0.01]">
               <div className="max-w-7xl mx-auto text-center mb-16">
                 <h2 className="text-3xl font-display font-bold text-white mb-4">Simple pricing</h2>
@@ -551,7 +578,7 @@ export default function App() {
               </div>
               <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
                 {PRICING.map((plan, i) => (
-                  <div key={i} className={`p-8 rounded-3xl border transition-all duration-500 hover:scale-[1.02] ${i === 1 ? 'border-neon-orange bg-neon-orange/5 shadow-orange-glow' : 'border-white/10 bg-white/5'} relative overflow-hidden backdrop-blur-sm`}>
+                  <div key={i} className={`p-8 rounded-3xl border transition-all duration-500 hover:scale-[1.02] ${i === 1 ? "border-neon-orange bg-neon-orange/5 shadow-orange-glow" : "border-white/10 bg-white/5"} relative overflow-hidden backdrop-blur-sm`}>
                     {i === 1 && <div className="absolute top-0 right-0 bg-neon-orange text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-widest">Most Popular</div>}
                     <h3 className="text-xl font-bold text-white mb-2 font-display">{plan.name}</h3>
                     <div className="flex items-baseline gap-1 mb-6">
@@ -565,7 +592,9 @@ export default function App() {
                         </li>
                       ))}
                     </ul>
-                    <Button onClick={() => window.location.href = `https://tty-live1.vercel.app/api?path=auth-github`} variant={i === 1 ? "orange" : "glass"} className="w-full h-11">Start Free Trial</Button>
+                    <button onClick={() => window.location.href = "https://tty-live1.vercel.app/api?path=auth-github"} className={`w-full h-11 rounded-xl font-semibold text-sm transition-all inline-flex items-center justify-center ${i === 1 ? "bg-neon-orange hover:bg-neon-orange/90 text-white shadow-orange-glow" : "bg-white/[0.05] border border-white/10 text-white hover:bg-white/10"}`}>
+                      Start Free Trial
+                    </button>
                   </div>
                 ))}
               </div>
@@ -591,7 +620,7 @@ export default function App() {
     );
   }
 
-  if (viewingSessionId) {
+    if (viewingSessionId) {
     return <ViewerPage sessionId={viewingSessionId} onBack={() => {
       window.history.pushState({}, '', '/');
       setViewingSessionId(null);
