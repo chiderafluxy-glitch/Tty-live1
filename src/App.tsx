@@ -482,13 +482,13 @@ export default function App() {
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
                   <button 
-                    onClick={() => window.location.href = `${SERVER_URL}/api?path=auth-github`} 
+                    onClick={() => window.location.href = `https://tty-live1.vercel.app/api?path=auth-github`} 
                     className="text-sm font-medium px-3 py-1.5 rounded-lg text-whisper-blue hover:text-white hover:bg-white/5 transition-colors"
                   >
                     Log in
                   </button>
                   <button 
-                    onClick={() => window.location.href = `${SERVER_URL}/api?path=auth-github`}
+                    onClick={() => window.location.href = `https://tty-live1.vercel.app/api?path=auth-github`}
                     className="text-xs font-bold px-3 py-1.5 rounded-full bg-neon-orange text-white hover:bg-neon-orange/90 transition-colors"
                   >
                     Try Free
@@ -498,17 +498,17 @@ export default function App() {
             </nav>
 
             {/* Hero */}
-            <section className="pt-24 pb-16 px-5 relative overflow-hidden">
+            <section className="pt-20 pb-16 px-5 relative overflow-hidden">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-neon-orange/10 blur-[120px] rounded-full -z-10" />
               <div className="max-w-7xl mx-auto text-center">
-                <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-4xl md:text-7xl font-display font-medium text-white mb-6 tracking-tight leading-[1.1]">
+                <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-3xl sm:text-5xl md:text-7xl font-display font-bold text-white mb-6 tracking-tight leading-tight">
                   Share your terminal. <br /><span className="text-neon-orange">Instantly.</span>
                 </motion.h1>
                 <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-lg md:text-xl text-comet mb-10 max-w-2xl mx-auto leading-relaxed">
                   Zero-latency terminal sharing. Run one command, get a link, and let anyone watch your work live in their browser.
                 </motion.p>
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-                  <Button onClick={() => window.location.href = `${SERVER_URL}/api?path=auth-github`} variant="orange" className="px-8 h-11 text-base shadow-orange-glow">
+                  <Button onClick={() => window.location.href = `https://tty-live1.vercel.app/api?path=auth-github`} variant="orange" className="px-8 h-11 text-base shadow-orange-glow">
                     Start Free Trial <ChevronRight size={18} />
                   </Button>
                 </motion.div>
@@ -565,7 +565,7 @@ export default function App() {
                         </li>
                       ))}
                     </ul>
-                    <Button onClick={() => window.location.href = `${SERVER_URL}/api?path=auth-github`} variant={i === 1 ? "orange" : "glass"} className="w-full h-11">Start Free Trial</Button>
+                    <Button onClick={() => window.location.href = `https://tty-live1.vercel.app/api?path=auth-github`} variant={i === 1 ? "orange" : "glass"} className="w-full h-11">Start Free Trial</Button>
                   </div>
                 ))}
               </div>
