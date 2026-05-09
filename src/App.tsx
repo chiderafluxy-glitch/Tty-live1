@@ -4,6 +4,7 @@ import {
   Terminal,
   Check,
   ChevronRight,
+  Chrome,
   LayoutDashboard, 
   History, 
   Settings, 
@@ -350,6 +351,62 @@ const StatCard = ({ label, value, trend, icon: Icon }: any) => (
 
 // --- Main App Component ---
 
+
+const AuthPage = ({ onBack }: { onBack: () => void }) => (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    className="fixed inset-0 z-50 bg-midnight-abyss/95 backdrop-blur-xl flex items-center justify-center p-6"
+  >
+    <div className="auth-card w-full max-w-md p-8 relative">
+      <button onClick={onBack} className="absolute top-6 right-6 text-whisper-blue hover:text-white cursor-pointer">
+        <ChevronRight size={24} className="rotate-180" />
+      </button>
+      <div className="mb-8">
+        <div className="flex items-center gap-2 mb-4">
+          <Terminal className="text-neon-orange" size={32} />
+          <span className="font-display text-2xl font-bold text-white">tty.live</span>
+        </div>
+        <h1 className="text-2xl font-display font-bold text-white mb-2">Welcome back</h1>
+        <p className="text-whisper-blue">Start your 7-day free trial now.</p>
+      </div>
+      <div className="space-y-4">
+        <button
+          onClick={() => { window.location.href = 'https://tty-live1.vercel.app/api?path=auth-github'; }}
+          className="w-full h-11 flex items-center justify-center gap-2 bg-white/[0.04] border border-white/10 rounded-xl text-sm font-medium text-white hover:bg-white/10 transition-all backdrop-blur-md"
+        >
+          <Github size={18} /> Continue with GitHub
+        </button>
+        <button className="w-full h-11 flex items-center justify-center gap-2 bg-white/[0.04] border border-white/10 rounded-xl text-sm font-medium text-white hover:bg-white/10 transition-all backdrop-blur-md">
+          <Chrome size={18} /> Continue with Google
+        </button>
+        <div className="flex items-center gap-4 py-4">
+          <div className="h-px flex-1 bg-white/5" />
+          <span className="text-[10px] text-interstellar-gray uppercase tracking-widest font-bold">or email</span>
+          <div className="h-px flex-1 bg-white/5" />
+        </div>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-[10px] uppercase tracking-wider font-bold text-arctic-mist mb-1.5 ml-1">Email address</label>
+            <input type="email" placeholder="dev@tty.live" className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:border-neon-orange outline-none transition-all placeholder:text-whisper-blue/50 h-11 backdrop-blur-md" />
+          </div>
+          <div>
+            <label className="block text-[10px] uppercase tracking-wider font-bold text-arctic-mist mb-1.5 ml-1">Password</label>
+            <input type="password" placeholder="••••••••" className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:border-neon-orange outline-none transition-all placeholder:text-whisper-blue/50 h-11 backdrop-blur-md" />
+          </div>
+          <button
+            onClick={() => { window.location.href = 'https://tty-live1.vercel.app/api?path=auth-github'; }}
+            className="w-full mt-2 h-11 bg-neon-orange hover:bg-neon-orange/90 text-white font-semibold rounded-xl transition-all shadow-orange-glow inline-flex items-center justify-center"
+          >
+            Sign In
+          </button>
+        </div>
+      </div>
+    </div>
+  </motion.div>
+);
+
 export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('home');
   const realtimeRef = useRef<any>(null);
@@ -361,6 +418,7 @@ export default function App() {
   const [sub, setSub] = useState<any>({ plan: 'trial', status: 'active' });
   const [sessionLink, setSessionLink] = useState<string>('');
   const [viewerCount, setViewerCount] = useState<number>(0);
+  const [showAuth, setShowAuth] = useState(false);
   const [landingView, setLandingView] = useState<'landing' | 'auth' | 'dashboard'>(() => {
     return localStorage.getItem('tty_token') ? 'dashboard' : 'landing';
   });
@@ -467,7 +525,7 @@ export default function App() {
 
   // Show landing page if not logged in
   if (landingView === 'landing') {
-    const goToAuth = () => { window.location.href = 'https://tty-live1.vercel.app/api?path=auth-github'; };
+    const goToAuth = () => { setShowAuth(true); };
 
     const LandingNav = () => (
       <nav className="fixed top-0 left-0 right-0 z-50 nav-blur">
@@ -492,6 +550,9 @@ export default function App() {
 
     return (
       <div className="min-h-screen bg-midnight-abyss">
+        <AnimatePresence>
+          {showAuth && <AuthPage key="auth" onBack={() => setShowAuth(false)} />}
+        </AnimatePresence>
         <AnimatePresence mode="wait">
           <motion.div key="landing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen">
             <LandingNav />
