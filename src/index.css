@@ -50,9 +50,3 @@
 @utility glass-button {
   @apply bg-white/[0.05] border border-white/10 backdrop-blur-lg hover:bg-white/[0.1] hover:border-white/20 transition-all duration-300;
 }
-
-/* Dashboard specific overrides */
-@layer base {
-  .void-black { color: #000000; }
-  .canvas-white { color: #ffffff; }
-}
